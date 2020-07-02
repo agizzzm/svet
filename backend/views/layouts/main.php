@@ -1,6 +1,7 @@
 <?php
 
 /* @var $this \yii\web\View */
+
 /* @var $content string */
 
 use backend\assets\AppAsset;
@@ -9,6 +10,7 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use common\widgets\Alert;
+use yii\helpers\Url;
 
 AppAsset::register($this);
 ?>
@@ -23,56 +25,105 @@ AppAsset::register($this);
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
-<body>
+<body class="hold-transition sidebar-mini">
 <?php $this->beginBody() ?>
 
-<div class="wrap">
-    <?php
-    NavBar::begin([
-        'brandLabel' => Yii::$app->name,
-        'brandUrl' => Yii::$app->homeUrl,
-        'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
-        ],
-    ]);
-    $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index']],
-    ];
-    if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
-    } else {
-        $menuItems[] = '<li>'
-            . Html::beginForm(['/site/logout'], 'post')
-            . Html::submitButton(
-                'Logout (' . Yii::$app->user->identity->username . ')',
-                ['class' => 'btn btn-link logout']
-            )
-            . Html::endForm()
-            . '</li>';
-    }
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => $menuItems,
-    ]);
-    NavBar::end();
-    ?>
+<div class="wrapper">
+    <!-- Navbar -->
+    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+        <!-- Left navbar links -->
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+            </li>
+            <li class="nav-item d-none d-sm-inline-block">
+                <a href="<?= Url::to(['site/index']) ?>" class="nav-link">Главная</a>
+            </li>
+        </ul>
+    </nav>
+    <!-- /.navbar -->
 
-    <div class="container">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
-        <?= Alert::widget() ?>
-        <?= $content ?>
+    <!-- Main Sidebar Container -->
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <!-- Brand Logo -->
+        <a href="<?= Url::to(['site/index']) ?>" class="brand-link">
+            <span class="brand-text font-weight-light">Светофор Групп</span>
+        </a>
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <!-- Sidebar Menu -->
+            <nav class="mt-2">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                    data-accordion="false">
+                    <li class="nav-header">Меню</li>
+                    <li class="nav-item">
+                        <a href="<?= Url::to(['user/index']) ?>" class="nav-link">
+                            <i class="nav-icon fa fa-users"></i>
+                            <p>Клиенты</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="<?= Url::to(['user/index']) ?>" class="nav-link">
+                            <i class="nav-icon fa fa-shopping-cart"></i>
+                            <p>Заказы</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="<?= Url::to(['user/index']) ?>" class="nav-link">
+                            <i class="nav-icon fa fa-handshake"></i>
+                            <p>Партнеры</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="<?= Url::to(['user/index']) ?>" class="nav-link">
+                            <i class="nav-icon fa fa-code-branch"></i>
+                            <p>Партнеры</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="<?= Url::to(['user/index']) ?>" class="nav-link">
+                            <i class="nav-icon fa fa-map-marker-alt"></i>
+                            <p>Партнеры</p>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <!-- /.sidebar-menu -->
+        </div>
+        <!-- /.sidebar -->
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <?= Breadcrumbs::widget([
+                    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+                ]) ?>
+                <?= Alert::widget() ?>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <?= $content ?>
+            </div><!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
     </div>
+    <!-- /.content-wrapper -->
+    <footer class="main-footer">
+        <div class="float-right d-none d-sm-block">
+            <b>Version</b> 3.0.5
+        </div>
+        <strong>Copyright &copy; <?= date('Y') ?></strong>
+    </footer>
+
 </div>
-
-<footer class="footer">
-    <div class="container">
-        <p class="pull-left">&copy; <?= Html::encode(Yii::$app->name) ?> <?= date('Y') ?></p>
-
-        <p class="pull-right"><?= Yii::powered() ?></p>
-    </div>
-</footer>
+<!-- ./wrapper -->
 
 <?php $this->endBody() ?>
 </body>

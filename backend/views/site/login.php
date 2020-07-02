@@ -2,34 +2,61 @@
 
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
+
 /* @var $model \common\models\LoginForm */
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
-$this->title = 'Login';
+$this->title = 'Авторизация';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-login">
-    <h1><?= Html::encode($this->title) ?></h1>
+<div class="login-box">
+    <div class="login-logo">
+        <b>Светофор Групп</b>
+    </div>
+    <!-- /.login-logo -->
+    <div class="card">
+        <div class="card-body login-card-body">
+            <?php $form = ActiveForm::begin([
+                'id'          => 'login-form',
+                'fieldConfig' => [
+                    'options' => [
+                        'tag' => false,
+                    ],
+                ],
+            ]); ?>
 
-    <p>Please fill out the following fields to login:</p>
-
-    <div class="row">
-        <div class="col-lg-5">
-            <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
-
-                <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
-
-                <?= $form->field($model, 'password')->passwordInput() ?>
-
-                <?= $form->field($model, 'rememberMe')->checkbox() ?>
-
-                <div class="form-group">
-                    <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
+            <div class="input-group mb-3">
+                <?= $form->field($model, 'username')->textInput([
+                    'autofocus'   => true,
+                    'placeholder' => 'Логин',
+                ])->label(false) ?>
+                <div class="input-group-append">
+                    <div class="input-group-text">
+                        <span class="fas fa-envelope"></span>
+                    </div>
                 </div>
-
+            </div>
+            <div class="input-group mb-3">
+                <?= $form->field($model, 'password')->passwordInput(['placeholder' => 'Пароль'])->label(false) ?>
+                <div class="input-group-append">
+                    <div class="input-group-text">
+                        <span class="fas fa-lock"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <!-- /.col -->
+                <div class="col-4">
+                    <button type="submit" class="btn btn-primary btn-block">Войти</button>
+                </div>
+                <!-- /.col -->
+            </div>
             <?php ActiveForm::end(); ?>
+
         </div>
+        <!-- /.login-card-body -->
     </div>
 </div>
+<!-- /.login-box -->
