@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ]); ?>
 
             <div class="input-group mb-3">
-                <?= $form->field($model, 'username')->textInput([
+                <?= $form->field($model, 'username', ['template' => "{label}\n{input}"])->textInput([
                     'autofocus'   => true,
                     'placeholder' => 'Логин',
                 ])->label(false) ?>
@@ -39,13 +39,22 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
             </div>
             <div class="input-group mb-3">
-                <?= $form->field($model, 'password')->passwordInput(['placeholder' => 'Пароль'])->label(false) ?>
+                <?= $form->field($model, 'password',
+                    ['template' => "{label}\n{input}"])->passwordInput(['placeholder' => 'Пароль'])->label(false) ?>
                 <div class="input-group-append">
                     <div class="input-group-text">
                         <span class="fas fa-lock"></span>
                     </div>
                 </div>
             </div>
+
+            <?php if (Yii::$app->session->hasFlash('failure')): ?>
+                <div class="alert alert-danger alert-dismissable">
+                    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                    <?= Yii::$app->session->getFlash('failure') ?>
+                </div>
+            <?php endif; ?>
+
             <div class="row">
                 <!-- /.col -->
                 <div class="col-4">

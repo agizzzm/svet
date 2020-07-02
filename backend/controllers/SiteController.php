@@ -82,6 +82,7 @@ class SiteController extends Controller
             return $this->goBack();
         } else {
             $model->password = '';
+            Yii::$app->session->setFlash('failure', "Неверный логин или пароль");
 
             return $this->render('login', [
                 'model' => $model,
