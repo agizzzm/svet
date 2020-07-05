@@ -4,6 +4,8 @@ namespace common\models\repositories;
 
 class ClientRepository extends \common\models\db\Client
 {
+    public $orders;
+
     /**
      * @return ClientRepository[]|[]
      */
@@ -28,5 +30,17 @@ class ClientRepository extends \common\models\db\Client
     public static function getByEmail(string $email)
     {
         return self::find()->where(['email' => $email])->one();
+    }
+
+    /**
+     * @return OrderRepository[]|[]
+     */
+    public function getOrders()
+    {
+        if ($this->orders == null) {
+            $this->orders = $this->hasMany(OrderRepository::class, ['order_id' => 'id'])->all();
+        }
+
+        return $this->orders;
     }
 }

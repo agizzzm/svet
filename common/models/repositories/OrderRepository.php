@@ -4,7 +4,7 @@ namespace common\models\repositories;
 
 class OrderRepository extends \common\models\db\Order
 {
-    protected $_client;
+    public $client;
 
     /**
      * @return OrderRepository[]|[]
@@ -28,10 +28,10 @@ class OrderRepository extends \common\models\db\Order
      */
     public function getClient()
     {
-        if ($this->_client == null) {
-            $this->_client = $this->hasOne(ClientRepository::class, ['id' => 'client_id'])->one();
+        if ($this->client == null) {
+            $this->client = $this->hasOne(ClientRepository::class, ['id' => 'client_id'])->one();
         }
 
-        return $this->_client;
+        return $this->client;
     }
 }
