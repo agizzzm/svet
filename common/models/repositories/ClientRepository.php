@@ -2,7 +2,7 @@
 
 namespace common\models\repositories;
 
-class ClientRepository extends \yii\db\ActiveRecord
+class ClientRepository extends \common\models\db\Client
 {
     /**
      * @return ClientRepository[]|[]
