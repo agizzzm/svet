@@ -58,7 +58,7 @@ AppAsset::register($this);
                     data-accordion="false">
                     <li class="nav-header">Меню</li>
                     <li class="nav-item">
-                        <a href="<?= Url::to(['user/index']) ?>" class="nav-link">
+                        <a href="<?= Url::to(['client/index']) ?>" class="nav-link">
                             <i class="nav-icon fa fa-users"></i>
                             <p>Клиенты</p>
                         </a>
