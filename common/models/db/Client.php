@@ -11,9 +11,9 @@ use Yii;
  * @property string|null $lastname Фамилия
  * @property string|null $firstname Имя
  * @property string|null $middlename Отчество
- * @property string|null $phone Телефон
- * @property string|null $email Email
- * @property int|null $category_id Категория
+ * @property string $phone Телефон
+ * @property string $email Email
+ * @property int $category_id Категория
  * @property float|null $cost Стоимость
  * @property float|null $first_payment Первый взнос
  */
@@ -33,9 +33,12 @@ class Client extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['phone', 'email', 'category_id'], 'required'],
             [['category_id'], 'integer'],
             [['cost', 'first_payment'], 'number'],
             [['lastname', 'firstname', 'middlename', 'phone', 'email'], 'string', 'max' => 255],
+            [['phone'], 'unique'],
+            [['email'], 'unique'],
         ];
     }
 
