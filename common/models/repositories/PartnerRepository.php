@@ -2,8 +2,12 @@
 
 namespace common\models\repositories;
 
+use common\models\db\PartnerBranch;
+
 class PartnerRepository extends \common\models\db\Partner
 {
+    public $branches;
+
     /**
      * @return PartnerRepository[]|[]
      */
@@ -28,5 +32,17 @@ class PartnerRepository extends \common\models\db\Partner
     public static function getByEmail(string $email)
     {
         return self::find()->where(['email' => $email])->one();
+    }
+
+    /**
+     * @return PartnerRepository[]|[]
+     */
+    public function getBranches()
+    {
+        if ($this->branches == null) {
+            $this->branches = $this->hasMany(PartnerBranch::class, ['partner_id' => 'id'])->all();
+        }
+
+        return $this->branches;
     }
 }
