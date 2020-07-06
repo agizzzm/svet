@@ -6,7 +6,7 @@ use common\models\db\PartnerBranch;
 
 class PartnerRepository extends \common\models\db\Partner
 {
-    public $branches;
+    public $_branches;
 
     /**
      * @return PartnerRepository[]|[]
@@ -39,10 +39,10 @@ class PartnerRepository extends \common\models\db\Partner
      */
     public function getBranches()
     {
-        if ($this->branches == null) {
-            $this->branches = $this->hasMany(PartnerBranch::class, ['partner_id' => 'id'])->all();
+        if ($this->_branches == null) {
+            $this->_branches = $this->hasMany(PartnerBranch::class, ['partner_id' => 'id'])->all();
         }
 
-        return $this->branches;
+        return $this->_branches;
     }
 }
