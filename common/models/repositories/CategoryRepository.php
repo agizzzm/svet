@@ -20,4 +20,24 @@ class CategoryRepository extends \common\models\db\Category
     {
         return self::find()->where(['category' => $name])->one();
     }
+
+    /**
+     * @param int $id
+     * @return CategoryRepository|null
+     */
+    public static function getById(int $id)
+    {
+        return self::find()->where(['id' => $id])->one();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id'       => 'ID',
+            'category' => 'Категория',
+        ];
+    }
 }

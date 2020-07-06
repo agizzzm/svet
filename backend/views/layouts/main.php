@@ -87,6 +87,25 @@ AppAsset::register($this);
                             <p>Партнеры</p>
                         </a>
                     </li>
+
+                    <li class="nav-item has-treeview menu-open">
+                        <a href="#" class="nav-link active">
+                            <i class="nav-icon fas fa-table"></i>
+                            <p>
+                                Справочники
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview" style="display: block;">
+                            <li class="nav-item">
+                                <a href="<?= Url::to(['category/index']) ?>" class="nav-link">
+                                    <i class="nav-icon fa fa-file"></i>
+                                    <p>Категории ВУ</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
                 </ul>
             </nav>
             <!-- /.sidebar-menu -->
