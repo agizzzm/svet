@@ -22,15 +22,21 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel'  => $searchModel,
         'columns'      => [
-            ['class' => 'yii\grid\SerialColumn'],
-
+            //['class' => 'yii\grid\SerialColumn'],
             'id',
             'lastname',
             'firstname',
             'middlename',
             'phone',
             'email:email',
-            'category_id',
+            //'category_id',
+            [
+                'attribute' => 'category_id',
+                'value'     => function ($model) {
+                    /* @var \common\models\repositories\ClientRepository $model */
+                    return $model->category ? $model->category->category : 'без категории';
+                },
+            ],
             'cost',
             'first_payment',
 

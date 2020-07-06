@@ -2,9 +2,11 @@
 
 namespace backend\controllers;
 
+use common\models\repositories\CategoryRepository;
 use common\models\repositories\ClientRepository;
 use Yii;
 use common\models\search\ClientSearchModel;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -14,10 +16,14 @@ class ClientController extends Controller
     public function behaviors()
     {
         return [
-            'verbs' => [
-                'class'   => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'actions' => ['index', 'view', 'create', 'update', 'delete'],
+                        'allow'   => true,
+                        'roles'   => ['admin'],
+                    ],
                 ],
             ],
         ];
@@ -31,13 +37,15 @@ class ClientController extends Controller
         return $this->render('index', [
             'searchModel'  => $searchModel,
             'dataProvider' => $dataProvider,
+            'categories'   => $this->getCategories(),
         ]);
     }
 
     public function actionView($id)
     {
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model'      => $this->findModel($id),
+            'categories' => $this->getCategories(),
         ]);
     }
 
@@ -46,11 +54,12 @@ class ClientController extends Controller
         $model = new ClientRepository();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         }
 
         return $this->render('create', [
-            'model' => $model,
+            'model'      => $model,
+            'categories' => $this->getCategories(),
         ]);
     }
 
@@ -59,11 +68,12 @@ class ClientController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         }
 
         return $this->render('update', [
-            'model' => $model,
+            'model'      => $model,
+            'categories' => $this->getCategories(),
         ]);
     }
 
@@ -81,5 +91,17 @@ class ClientController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    protected function getCategories()
+    {
+        $items = [];
+
+        $categories = CategoryRepository::getAll();
+        foreach ($categories as $category) {
+            $items[$category->id] = $category->category;
+        }
+
+        return $items;
     }
 }

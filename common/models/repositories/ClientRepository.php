@@ -4,7 +4,8 @@ namespace common\models\repositories;
 
 class ClientRepository extends \common\models\db\Client
 {
-    public $orders;
+    public $_orders;
+    public $_category;
 
     /**
      * @return ClientRepository[]|[]
@@ -46,12 +47,25 @@ class ClientRepository extends \common\models\db\Client
      */
     public function getOrders()
     {
-        if ($this->orders == null) {
-            $this->orders = $this->hasMany(OrderRepository::class, ['order_id' => 'id'])->all();
+        if ($this->_orders == null) {
+            $this->_orders = $this->hasMany(OrderRepository::class, ['order_id' => 'id'])->all();
         }
 
-        return $this->orders;
+        return $this->_orders;
     }
+
+    /**
+     * @return CategoryRepository|null
+     */
+    public function getCategory()
+    {
+        if ($this->_category == null) {
+            $this->_category = $this->hasOne(CategoryRepository::class, ['id' => 'category_id'])->one();
+        }
+
+        return $this->_category;
+    }
+
 
     public function attributeLabels()
     {

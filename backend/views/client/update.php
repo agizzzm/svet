@@ -4,6 +4,7 @@ use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\repositories\ClientRepository */
+/* @var array $categories */
 
 $this->title = 'Обновить данные клиента: ' . $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Клиенты', 'url' => ['index']];
@@ -12,10 +13,9 @@ $this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="client-update">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
     <?= $this->render('_form', [
-        'model' => $model,
+        'model'      => $model,
+        'categories' => $categories,
     ]) ?>
 
 </div>
