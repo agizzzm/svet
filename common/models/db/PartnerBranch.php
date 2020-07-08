@@ -10,7 +10,7 @@ use Yii;
  * @property int $id
  * @property int $partner_id Партнер
  * @property string $address Адрес
- * @property string $category Категория
+ * @property int $category_id Категория
  * @property float $cost Стоимость
  */
 class PartnerBranch extends \yii\db\ActiveRecord
@@ -29,11 +29,10 @@ class PartnerBranch extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['partner_id', 'address', 'category', 'cost'], 'required'],
-            [['partner_id'], 'integer'],
+            [['partner_id', 'address', 'category_id', 'cost'], 'required'],
+            [['partner_id', 'category_id'], 'integer'],
             [['address'], 'string'],
             [['cost'], 'number'],
-            [['category'], 'string', 'max' => 255],
         ];
     }
 
@@ -46,7 +45,7 @@ class PartnerBranch extends \yii\db\ActiveRecord
             'id' => 'ID',
             'partner_id' => 'Partner ID',
             'address' => 'Address',
-            'category' => 'Category',
+            'category_id' => 'Category ID',
             'cost' => 'Cost',
         ];
     }

@@ -6,7 +6,7 @@ use common\models\db\PartnerBranch;
 
 class PartnerRepository extends \common\models\db\Partner
 {
-    public $_branches;
+    public $_branches = null;
 
     /**
      * @return PartnerRepository[]|[]

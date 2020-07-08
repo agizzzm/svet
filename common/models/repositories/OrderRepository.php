@@ -4,7 +4,7 @@ namespace common\models\repositories;
 
 class OrderRepository extends \common\models\db\Order
 {
-    public $_client;
+    public $_client = null;
 
     /**
      * @return OrderRepository[]|[]

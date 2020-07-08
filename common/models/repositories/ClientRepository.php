@@ -4,8 +4,8 @@ namespace common\models\repositories;
 
 class ClientRepository extends \common\models\db\Client
 {
-    public $_orders;
-    public $_category;
+    public $_orders = null;
+    public $_category = null;
 
     /**
      * @return ClientRepository[]|[]

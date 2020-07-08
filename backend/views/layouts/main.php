@@ -76,7 +76,7 @@ AppAsset::register($this);
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="<?= Url::to(['user/index']) ?>" class="nav-link">
+                        <a href="<?= Url::to(['partner-branch/index']) ?>" class="nav-link">
                             <i class="nav-icon fa fa-code-branch"></i>
                             <p>Филиалы партнеров</p>
                         </a>

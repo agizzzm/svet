@@ -4,16 +4,16 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel common\models\search\OrderSearchModel */
+/* @var $searchModel common\models\search\PartnerBranchSearchModel */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Заказы';
+$this->title = 'Филиалы партернов';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="order-index">
+<div class="partner-branch-index">
 
     <p>
-        <?= Html::a('Добавить заказ', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Добавить филиал', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -25,12 +25,19 @@ $this->params['breadcrumbs'][] = $this->title;
             //['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            //'client_id',
             [
-                'attribute' => 'client_id',
+                'attribute' => 'partner_id',
                 'value'     => function ($model) {
-                    /* @var \common\models\repositories\OrderRepository $model */
-                    return $model->client ? $model->client->lastname . ' ' . $model->client->firstname . ' ' . $model->client->middlename . ' ' . $model->client->phone : 'клиент не определен';
+                    /* @var \common\models\repositories\PartnerBranchRepository $model */
+                    return $model->partner ? $model->partner->name : 'не указан';
+                },
+            ],
+            'address:ntext',
+            [
+                'attribute' => 'category_id',
+                'value'     => function ($model) {
+                    /* @var \common\models\repositories\PartnerBranchRepository $model */
+                    return $model->category ? $model->category->category : 'без категории';
                 },
             ],
             'cost',
