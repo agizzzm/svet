@@ -84,7 +84,7 @@ class SiteController extends Controller
             if ($model->load(Yii::$app->request->post())) {
                 Yii::$app->session->setFlash('failure', "Неверный логин или пароль");
             }
-            
+
             $model->password = '';
 
             return $this->render('login', [

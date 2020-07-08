@@ -64,7 +64,7 @@ AppAsset::register($this);
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="<?= Url::to(['user/index']) ?>" class="nav-link">
+                        <a href="<?= Url::to(['order/index']) ?>" class="nav-link">
                             <i class="nav-icon fa fa-shopping-cart"></i>
                             <p>Заказы</p>
                         </a>
@@ -78,13 +78,13 @@ AppAsset::register($this);
                     <li class="nav-item">
                         <a href="<?= Url::to(['user/index']) ?>" class="nav-link">
                             <i class="nav-icon fa fa-code-branch"></i>
-                            <p>Партнеры</p>
+                            <p>Филиалы партнеров</p>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="<?= Url::to(['user/index']) ?>" class="nav-link">
                             <i class="nav-icon fa fa-map-marker-alt"></i>
-                            <p>Партнеры</p>
+                            <p>Филиалы на карте</p>
                         </a>
                     </li>
 

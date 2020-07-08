@@ -34,4 +34,13 @@ class OrderRepository extends \common\models\db\Order
 
         return $this->_client;
     }
+
+    public function attributeLabels()
+    {
+        return [
+            'id'        => 'ID',
+            'client_id' => 'Клиент',
+            'cost'      => 'Сумма платежа',
+        ];
+    }
 }
