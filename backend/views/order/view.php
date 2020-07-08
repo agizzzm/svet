@@ -24,6 +24,8 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
     </p>
 
+    Ссылка на оплату https://svetoforgroup.ru/payment/order/<?= $model->id ?>
+
     <?= DetailView::widget([
         'model'      => $model,
         'attributes' => [

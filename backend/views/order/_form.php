@@ -42,7 +42,7 @@ $this->registerJs($js);
         <?= $form->field($model, 'cost')->textInput(['maxlength' => true]) ?>
 
         <div class="form-group">
-            <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
+            <?= Html::submitButton('Сформировать заказ', ['class' => 'btn btn-success']) ?>
         </div>
 
         <?php ActiveForm::end(); ?>

@@ -7,6 +7,7 @@ use yii\widgets\ActiveForm;
 /* @var $model common\models\repositories\ClientRepository */
 /* @var $form yii\widgets\ActiveForm */
 /* @var array $categories */
+/* @var bool $isCreate */
 ?>
 
 <div class="client-form">
@@ -34,7 +35,11 @@ use yii\widgets\ActiveForm;
         <?= $form->field($model, 'first_payment')->textInput(['maxlength' => true]) ?>
 
         <div class="form-group">
-            <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
+            <?php if ($isCreate) : ?>
+                <?= Html::submitButton('Сформировать заказ', ['class' => 'btn btn-success']) ?>
+            <?php else: ?>
+                <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
+            <?php endif ?>
         </div>
 
         <?php ActiveForm::end(); ?>

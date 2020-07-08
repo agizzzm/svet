@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use common\models\repositories\CategoryRepository;
 use common\models\repositories\ClientRepository;
+use common\models\repositories\OrderRepository;
 use Yii;
 use common\models\search\ClientSearchModel;
 use yii\filters\AccessControl;
@@ -54,7 +55,12 @@ class ClientController extends Controller
         $model = new ClientRepository();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index']);
+            $orderModel = new OrderRepository();
+            $orderModel->client_id = $model->id;
+            $orderModel->cost = $model->first_payment;
+            $orderModel->save();
+
+            return $this->redirect(['view', 'orderModel' => $orderModel]);
         }
 
         return $this->render('create', [

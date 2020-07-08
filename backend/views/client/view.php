@@ -5,38 +5,16 @@ use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\db\Client */
+/* @var $orderModel \common\models\repositories\OrderRepository */
 
-$this->title = $model->id;
+$this->title = 'Сформировать заказ';
 $this->params['breadcrumbs'][] = ['label' => 'Клиенты', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Добавить клиента', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="client-view">
 
-    <p>
-        <?= Html::a('Обновить', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data'  => [
-                'confirm' => 'Вы уверены что хотите удалить запись?',
-                'method'  => 'post',
-            ],
-        ]) ?>
-    </p>
-
-    <?= DetailView::widget([
-        'model'      => $model,
-        'attributes' => [
-            'id',
-            'lastname',
-            'firstname',
-            'middlename',
-            'phone',
-            'email:email',
-            'category_id',
-            'cost',
-            'first_payment',
-        ],
-    ]) ?>
+    Ссылка на оплату https://svetoforgroup.ru/payment/order/<?= $orderModel->id ?>
 
 </div>
