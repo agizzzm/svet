@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use common\models\db\Order;
 use common\models\repositories\CategoryRepository;
 use common\models\repositories\ClientRepository;
 use common\models\repositories\OrderRepository;
@@ -42,10 +43,10 @@ class ClientController extends Controller
         ]);
     }
 
-    public function actionView($orderModel)
+    public function actionView($id)
     {
         return $this->render('view', [
-            //'model'      => $this->findModel($id),
+            'model'      => OrderRepository::getById($id),
             'categories' => $this->getCategories(),
         ]);
     }
@@ -60,7 +61,7 @@ class ClientController extends Controller
             $orderModel->cost = $model->first_payment;
             $orderModel->save();
 
-            return $this->redirect(['view', 'orderModel' => $orderModel]);
+            return $this->redirect(['view', 'id' => $orderModel->id]);
         }
 
         return $this->render('create', [

@@ -24,6 +24,15 @@ class OrderRepository extends \common\models\db\Order
     }
 
     /**
+     * @param int $client_id
+     * @return OrderRepository[]|[]
+     */
+    public static function getById(int $id)
+    {
+        return self::find()->where(['id' => $id])->all();
+    }
+
+    /**
      * @return ClientRepository|null
      */
     public function getClient()
