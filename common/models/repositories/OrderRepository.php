@@ -29,7 +29,7 @@ class OrderRepository extends \common\models\db\Order
      */
     public static function getById(int $id)
     {
-        return self::find()->where(['id' => $id])->all();
+        return self::find()->where(['id' => $id])->one();
     }
 
     /**
