@@ -70,7 +70,7 @@ AppAsset::register($this);
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="<?= Url::to(['user/index']) ?>" class="nav-link">
+                        <a href="<?= Url::to(['partner/index']) ?>" class="nav-link">
                             <i class="nav-icon fa fa-handshake"></i>
                             <p>Партнеры</p>
                         </a>

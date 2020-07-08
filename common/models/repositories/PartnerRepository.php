@@ -45,4 +45,17 @@ class PartnerRepository extends \common\models\db\Partner
 
         return $this->_branches;
     }
+
+    public function attributeLabels()
+    {
+        return [
+            'id'            => 'ID',
+            'name'          => 'Наименование',
+            'contact'       => 'Контактное лицо',
+            'contact_phone' => 'Телефон контактного лица',
+            'email'         => 'Email',
+            'region'        => 'Регион',
+            'city'          => 'Город',
+        ];
+    }
 }
