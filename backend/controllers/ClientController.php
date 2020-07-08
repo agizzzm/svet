@@ -46,7 +46,7 @@ class ClientController extends Controller
     public function actionView($id)
     {
         return $this->render('view', [
-            'model'      => OrderRepository::getById($id),
+            'orderModel'      => OrderRepository::getById($id),
             'categories' => $this->getCategories(),
         ]);
     }
