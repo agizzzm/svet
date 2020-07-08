@@ -42,10 +42,10 @@ class ClientController extends Controller
         ]);
     }
 
-    public function actionView($id)
+    public function actionView($orderModel)
     {
         return $this->render('view', [
-            'model'      => $this->findModel($id),
+            //'model'      => $this->findModel($id),
             'categories' => $this->getCategories(),
         ]);
     }
