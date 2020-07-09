@@ -28,6 +28,7 @@ $isActiveClientMenuItem = ($this->context->route == "client/index") ? 'active' :
 $isActiveOrderMenuItem = ($this->context->route == "order/index") ? 'active' : '';
 $isActivePartnerMenuItem = ($this->context->route == "partner/index") ? 'active' : '';
 $isActivePartnerBranchMenuItem = ($this->context->route == "partner-branch/index") ? 'active' : '';
+$isActivePartnerBranchMapMenuItem = ($this->context->route == "partner-branch/map") ? 'active' : '';
 $isActiveUserMenuItem = ($this->context->route == "user/index") ? 'active' : '';
 $isActiveCategoryMenuItem = ($this->context->route == "category/index") ? 'active' : '';
 $isActiveUserMenuItem = ($this->context->route == "user/index") ? 'active' : '';
@@ -80,7 +81,8 @@ $isActiveUserMenuItem = ($this->context->route == "user/index") ? 'active' : '';
                     data-accordion="false">
                     <li class="nav-header">Меню</li>
                     <li class="nav-item">
-                        <a href="<?= Url::to(['client/index']) ?>" class="nav-link <?php echo $isActiveClientMenuItem ?>">
+                        <a href="<?= Url::to(['client/index']) ?>"
+                           class="nav-link <?php echo $isActiveClientMenuItem ?>">
                             <i class="nav-icon fa fa-users"></i>
                             <p>Клиенты</p>
                         </a>
@@ -92,19 +94,22 @@ $isActiveUserMenuItem = ($this->context->route == "user/index") ? 'active' : '';
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="<?= Url::to(['partner/index']) ?>" class="nav-link <?php echo $isActivePartnerMenuItem ?> ">
+                        <a href="<?= Url::to(['partner/index']) ?>"
+                           class="nav-link <?php echo $isActivePartnerMenuItem ?> ">
                             <i class="nav-icon fa fa-handshake"></i>
                             <p>Партнеры</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="<?= Url::to(['partner-branch/index']) ?>" class="nav-link <?php echo $isActivePartnerBranchMenuItem ?>">
+                        <a href="<?= Url::to(['partner-branch/index']) ?>"
+                           class="nav-link <?php echo $isActivePartnerBranchMenuItem ?>">
                             <i class="nav-icon fa fa-code-branch"></i>
                             <p>Филиалы партнеров</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="<?= Url::to(['user/index']) ?>" class="nav-link">
+                        <a href="<?= Url::to(['partner-branch/map']) ?>"
+                           class="nav-link <?php echo $isActivePartnerBranchMapMenuItem ?>">
                             <i class="nav-icon fa fa-map-marker-alt"></i>
                             <p>Филиалы на карте</p>
                         </a>
@@ -120,14 +125,16 @@ $isActiveUserMenuItem = ($this->context->route == "user/index") ? 'active' : '';
                         </a>
                         <ul class="nav nav-treeview" style="display: block;">
                             <li class="nav-item">
-                                <a href="<?= Url::to(['category/index']) ?>" class="nav-link <?php echo $isActiveCategoryMenuItem ?>">
+                                <a href="<?= Url::to(['category/index']) ?>"
+                                   class="nav-link <?php echo $isActiveCategoryMenuItem ?>">
                                     <i class="nav-icon fa fa-file"></i>
                                     <p>Категории ВУ</p>
                                 </a>
                             </li>
                             <?php if (!$isAccountManager) : ?>
                                 <li class="nav-item">
-                                    <a href="<?= Url::to(['user/index']) ?>" class="nav-link <?php echo $isActiveUserMenuItem ?>">
+                                    <a href="<?= Url::to(['user/index']) ?>"
+                                       class="nav-link <?php echo $isActiveUserMenuItem ?>">
                                         <i class="nav-icon fa fa-id-card"></i>
                                         <p>Пользователи</p>
                                     </a>

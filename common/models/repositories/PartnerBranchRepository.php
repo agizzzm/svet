@@ -51,11 +51,12 @@ class PartnerBranchRepository extends \common\models\db\PartnerBranch
     public function attributeLabels()
     {
         return [
-            'id'         => 'ID',
-            'partner_id' => 'Партнер',
-            'address'    => 'Адрес',
-            'category_id'   => 'Категория',
-            'cost'       => 'Стоимость',
+            'id'          => 'ID',
+            'partner_id'  => 'Партнер',
+            'adddress'    => 'Адрес',
+            'coor'        => 'Координаты',
+            'category_id' => 'Категория',
+            'cost'        => 'Стоимость',
         ];
     }
 }

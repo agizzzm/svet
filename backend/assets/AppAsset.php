@@ -19,6 +19,7 @@ class AppAsset extends AssetBundle
         'https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css',
         'css/select2.css',
         'css/breadcrumb.css',
+        'css/map.css',
     ];
     public $js = [
         'plugins/jquery/jquery.min.js',

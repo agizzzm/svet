@@ -13,6 +13,7 @@ use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use linslin\yii2\curl;
 
 class PartnerBranchController extends Controller
 {
@@ -23,7 +24,7 @@ class PartnerBranchController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['index', 'view', 'create', 'update', 'delete'],
+                        'actions' => ['index', 'view', 'create', 'update', 'delete', 'map'],
                         'allow'   => true,
                         'roles'   => ['admin', 'account-manager'],
                     ],
@@ -42,6 +43,41 @@ class PartnerBranchController extends Controller
             'dataProvider' => $dataProvider,
             'partners'     => $this->getPartners(),
             'categories'   => $this->getCategories(),
+        ]);
+    }
+
+    public function actionMap()
+    {
+        $searchModel = new PartnerBranchSearchModel();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        $yandexApiKey = Yii::$app->params['yandexApiKey'];
+        $url = 'https://geocode-maps.yandex.ru/1.x/?format=json&results=1&apikey=' . $yandexApiKey . '&geocode=';
+
+        $partnersBranches = PartnerBranchRepository::getAll();
+        foreach ($partnersBranches as $item) {
+            if (!empty($item->address) && empty($item->coor)) {
+                $url = $url . urlencode($item->address);
+                $response = $this->_request($url);
+                if ($response) {
+                    if (isset($response->response->GeoObjectCollection) &&
+                        isset($response->response->GeoObjectCollection->featureMember[0]) &&
+                        isset($response->response->GeoObjectCollection->featureMember[0]->GeoObject) &&
+                        isset($response->response->GeoObjectCollection->featureMember[0]->GeoObject->Point)
+                    ) {
+                        $item->coor = (string)$response->response->GeoObjectCollection->featureMember[0]->GeoObject->Point->pos;
+                        $item->save();
+                    }
+                }
+            }
+        }
+
+        return $this->render('map', [
+            'searchModel'  => $searchModel,
+            'dataProvider' => $dataProvider,
+            'partners'     => $this->getPartners(),
+            'categories'   => $this->getCategories(),
+            'yandexApiKey' => $yandexApiKey,
         ]);
     }
 
@@ -122,5 +158,21 @@ class PartnerBranchController extends Controller
         }
 
         return $items;
+    }
+
+    protected function _request($url)
+    {
+        $agent = 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 1.0.3705; .NET CLR 1.1.4322)';
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_VERBOSE, true);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_USERAGENT, $agent);
+        curl_setopt($ch, CURLOPT_URL, $url);
+
+        $result = curl_exec($ch);
+
+        return json_decode($result);
     }
 }
