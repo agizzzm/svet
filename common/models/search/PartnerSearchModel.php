@@ -2,7 +2,9 @@
 
 namespace common\models\search;
 
+use common\models\repositories\UserRepository;
 use common\models\repositories\PartnerRepository;
+use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use common\models\db\Partner;
@@ -25,8 +27,17 @@ class PartnerSearchModel extends Partner
 
     public function search($params)
     {
+        /* @var UserRepository $user */
+        $user = Yii::$app->user->identity;
+
         $query = PartnerRepository::find();
 
+        $authManager = Yii::$app->authManager;
+        $roles = Yii::$app->authManager->getRolesByUser($user->id);
+        if (array_key_exists('account-manager', $roles)) {
+            $query->where(['id' => explode(',', $user->partners_ids)]);
+        }
+        
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
