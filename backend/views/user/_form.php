@@ -10,9 +10,35 @@ use yii\widgets\ActiveForm;
 /* @var array $partners */
 
 $userPartners = [];
+$selectedVals = '';
 if (!empty($model->partners_ids)) {
     $userPartners = explode(',', $model->partners_ids);
+    $selectedVals = '[' . $model->partners_ids . ']';
 }
+
+$items = [];
+foreach ($partners as $id => $partner) {
+    $item = new \StdClass;
+    $item->id = $id;
+    $item->text = $partner;
+    $items[] = $item;
+}
+
+$js = json_encode($items, JSON_UNESCAPED_UNICODE);
+
+$js = "var data = " . $js . ";
+
+$('#partners').select2({
+  data: data
+});
+
+$('#partners').val(" . $selectedVals . "); 
+$('#partners').trigger('change'); 
+";
+
+
+$this->registerJs($js);
+
 ?>
 
 <div class="user-form">
@@ -31,20 +57,13 @@ if (!empty($model->partners_ids)) {
 
         <div class="form-group field-userrepository-email">
             <label class="control-label">Назначенные партнеры</label>
-
-            <?php foreach ($partners as $id => $partner) : ?>
-                <?php
-                $checked = false;
-                foreach ($userPartners as $upId) {
-                    if ($id == $upId) {
-                        $checked = true;
-                        break;
-                    }
-                }
-                ?>
-                <br>
-                <?= Html::checkbox('partners[' . $id . ']', $checked) ?>&nbsp;<label><?= $partner ?></label>
-            <?php endforeach; ?>
+            <?= Html::dropDownList('partners[]', null, $partners,
+                [
+                    'class'    => 'form-control',
+                    'multiple' => 'multiple',
+                    'id'       => 'partners',
+                ]) ?>
+            &nbsp;</label>
         </div>
 
 

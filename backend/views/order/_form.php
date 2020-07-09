@@ -8,27 +8,6 @@ use yii\widgets\ActiveForm;
 /* @var $model common\models\db\Order */
 /* @var $form yii\widgets\ActiveForm */
 /* @var array $clients */
-
-$items = [];
-foreach ($clients as $id => $client) {
-    $item = new \StdClass;
-    $item->id = $id;
-    $item->text = $client;
-    $items[] = $item;
-}
-
-$js = json_encode($items, JSON_UNESCAPED_UNICODE);
-
-
-$js = 'var data = ' . $js . ';
-
-$("#orderrepository-client_id").select2({
-  data: data
-})
-';
-
-//$this->registerJs($js);
-
 ?>
 
 <div class="order-form">

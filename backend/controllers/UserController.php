@@ -63,7 +63,7 @@ class UserController extends Controller
             $model->status = UserRepository::STATUS_ACTIVE;
             $model->username = $post['email'];
             $model->email = $post['email'];
-            $model->partners_ids = $partners ? implode(',', array_keys($partners)) : '';
+            $model->partners_ids = $partners ? implode(',', $partners) : '';
 
             if ($model->save()) {
                 // ставим роли
@@ -99,7 +99,7 @@ class UserController extends Controller
                 $model->setPassword($post['password_new']);
             }
 
-            $model->partners_ids = $partners ? implode(',', array_keys($partners)) : '';
+            $model->partners_ids = $partners ? implode(',', $partners) : '';
 
             if ($model->save()) {
                 return $this->redirect(['index']);
