@@ -12,9 +12,6 @@ use yii\filters\VerbFilter;
 
 class CategoryController extends Controller
 {
-    /**
-     * {@inheritdoc}
-     */
     public function behaviors()
     {
         return [
@@ -24,7 +21,7 @@ class CategoryController extends Controller
                     [
                         'actions' => ['index', 'view', 'create', 'update', 'delete'],
                         'allow'   => true,
-                        'roles'   => ['admin'],
+                        'roles'   => ['admin', 'account-manager'],
                     ],
                 ],
             ],

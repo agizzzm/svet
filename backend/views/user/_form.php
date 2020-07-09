@@ -10,14 +10,19 @@ use yii\widgets\ActiveForm;
 
 <div class="user-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
 
-    <?= $form->field($model, 'status')->textInput() ?>
+        <?php $form = ActiveForm::begin(); ?>
 
-    <div class="form-group">
-        <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
+        <?= $form->field($model, 'email')->input('email') ?>
+
+        <?= $form->field($model, 'password_hash')->input('password') ?>
+
+        <div class="form-group">
+            <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
+        </div>
+
+        <?php ActiveForm::end(); ?>
+
     </div>
-
-    <?php ActiveForm::end(); ?>
-
 </div>

@@ -24,7 +24,7 @@ class ClientController extends Controller
                     [
                         'actions' => ['index', 'view', 'create', 'update', 'delete'],
                         'allow'   => true,
-                        'roles'   => ['admin'],
+                        'roles'   => ['admin', 'account-manager'],
                     ],
                 ],
             ],
