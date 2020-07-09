@@ -4,16 +4,16 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel common\models\search\PartnerBranchSearchModel */
+/* @var $searchModel common\models\search\UserSearchModel */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Филиалы партернов';
+$this->title = 'Пользователи';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="partner-branch-index">
+<div class="user-index">
 
     <p>
-        <?= Html::a('Добавить филиал', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Добавить пользователя', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -26,22 +26,13 @@ $this->params['breadcrumbs'][] = $this->title;
             //['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            [
-                'attribute' => 'partner_id',
-                'value'     => function ($model) {
-                    /* @var \common\models\repositories\PartnerBranchRepository $model */
-                    return $model->partner ? $model->partner->name : 'не указан';
-                },
-            ],
-            'address:ntext',
-            [
-                'attribute' => 'category_id',
-                'value'     => function ($model) {
-                    /* @var \common\models\repositories\PartnerBranchRepository $model */
-                    return $model->category ? $model->category->category : 'без категории';
-                },
-            ],
-            'cost',
+            //'username',
+            //'auth_key',
+            'email:email',
+            //'status',
+            //'created_at',
+            //'updated_at',
+            //'verification_token',
 
             [
                 'class'    => 'yii\grid\ActionColumn',

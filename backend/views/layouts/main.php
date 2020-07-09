@@ -39,6 +39,9 @@ AppAsset::register($this);
             <li class="nav-item d-none d-sm-inline-block">
                 <a href="<?= Url::to(['site/index']) ?>" class="nav-link">Главная</a>
             </li>
+            <li class="nav-item">
+                <a href="<?= Url::to(['site/logout']) ?>" data-method="post" class="nav-link">Выход</a>
+            </li>
         </ul>
     </nav>
     <!-- /.navbar -->
@@ -101,6 +104,12 @@ AppAsset::register($this);
                                 <a href="<?= Url::to(['category/index']) ?>" class="nav-link">
                                     <i class="nav-icon fa fa-file"></i>
                                     <p>Категории ВУ</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="<?= Url::to(['user/index']) ?>" class="nav-link">
+                                    <i class="nav-icon fa fa-id-card"></i>
+                                    <p>Пользователи</p>
                                 </a>
                             </li>
                         </ul>

@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ]); ?>
 
             <div class="input-group mb-3">
-                <?= $form->field($model, 'username', ['template' => "{label}\n{input}"])->textInput([
+                <?= $form->field($model, 'email', ['template' => "{label}\n{input}"])->textInput([
                     'autofocus'   => true,
                     'placeholder' => 'Логин',
                 ])->label(false) ?>

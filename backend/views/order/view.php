@@ -14,5 +14,5 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="order-view">
 
     Ссылка на оплату https://svetoforgroup.ru/payment/order/<?= $model->id ?>
-    
+
 </div>

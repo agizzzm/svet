@@ -44,6 +44,12 @@ class RbacController extends Controller
             $authManager->assign($admin, $user->id);
         }
 
+        $accountManager = $authManager->getRole('account-manager');
+        if (empty($accountManager)) {
+            $accountManager = $authManager->createRole('account-manager');
+            $authManager->add($accountManager);
+        }
+
         echo 'End';
         echo PHP_EOL;
     }
