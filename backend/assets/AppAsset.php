@@ -12,12 +12,13 @@ class AppAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'css/breadcrumb.css',
         'plugins/fontawesome-free/css/all.min.css',
         'https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css',
         'dist/css/adminlte.min.css',
         'https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700',
         'https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css',
+        'css/select2.css',
+        'css/breadcrumb.css',
     ];
     public $js = [
         'plugins/jquery/jquery.min.js',
