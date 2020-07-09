@@ -6,6 +6,7 @@ use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model common\models\User */
 /* @var $form yii\widgets\ActiveForm */
+/* @var bool $isCreate */
 ?>
 
 <div class="user-form">
@@ -16,7 +17,11 @@ use yii\widgets\ActiveForm;
 
         <?= $form->field($model, 'email')->input('email') ?>
 
-        <?= $form->field($model, 'password_hash')->input('password') ?>
+        <?php if ($isCreate) : ?>
+            <?= $form->field($model, 'password_hash')->input('password') ?>
+        <?php else : ?>
+            <?= $form->field($model, 'password_new')->input('password') ?>
+        <?php endif ?>
 
         <div class="form-group">
             <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>

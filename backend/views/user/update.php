@@ -14,6 +14,7 @@ $this->params['breadcrumbs'][] = 'Обновить';
 
     <?= $this->render('_form', [
         'model' => $model,
+        'isCreate'   => false,
     ]) ?>
 
 </div>

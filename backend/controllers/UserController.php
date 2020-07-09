@@ -51,8 +51,28 @@ class UserController extends Controller
     {
         $model = new UserRepository();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        $post = Yii::$app->request->post('UserRepository');
+
+        if (!empty($post)) {
+
+            $model->generateAuthKey();
+            $model->setPassword($post['password_hash']);
+            $model->status = UserRepository::STATUS_ACTIVE;
+            $model->username = $post['email'];
+            $model->email = $post['email'];
+
+            if ($model->save()) {
+                // ставим роли
+                $authManager = \Yii::$app->authManager;
+                $accountManager = $authManager->getRole('account-manager');
+
+                $roles = \Yii::$app->authManager->getRolesByUser($model->id);
+                if (!array_key_exists('account-manager', $roles)) {
+                    $authManager->assign($accountManager, $model->id);
+                }
+
+                return $this->redirect(['index']);
+            }
         }
 
         return $this->render('create', [
@@ -64,8 +84,18 @@ class UserController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        $post = Yii::$app->request->post('UserRepository');
+
+        if (!empty($post)) {
+
+            if (!empty($post['password_new'])) {
+                $model->generateAuthKey();
+                $model->setPassword($post['password_new']);
+            }
+
+            if ($model->save()) {
+                return $this->redirect(['index']);
+            }
         }
 
         return $this->render('update', [

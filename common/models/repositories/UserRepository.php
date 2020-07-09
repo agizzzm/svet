@@ -4,6 +4,8 @@ namespace common\models\repositories;
 
 class UserRepository extends \common\models\User
 {
+    public $password_new;
+
     /**
      * @return UserRepository[]|[]
      */
@@ -36,9 +38,11 @@ class UserRepository extends \common\models\User
     public function attributeLabels()
     {
         return [
-            'id'    => 'ID',
-            'email' => 'Логин',
-            'role'  => 'Роль',
+            'id'            => 'ID',
+            'email'         => 'Логин',
+            'password_hash' => 'Пароль',
+            'password_new'  => 'Новый пароль',
+            'role'          => 'Роль',
         ];
     }
 }
