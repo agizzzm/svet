@@ -79,7 +79,7 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+            return $this->redirect(['client/index']);
         } else {
             if ($model->load(Yii::$app->request->post())) {
                 Yii::$app->session->setFlash('failure', "Неверный логин или пароль");

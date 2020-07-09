@@ -119,7 +119,8 @@ AppAsset::register($this);
         <section class="content-header">
             <div class="container-fluid">
                 <?= Breadcrumbs::widget([
-                    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+                    'homeLink' => ['label' => 'Главная', 'url' => '/index.php'],
+                    'links'    => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
                 ]) ?>
                 <?= Alert::widget() ?>
             </div><!-- /.container-fluid -->

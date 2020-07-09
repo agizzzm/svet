@@ -8,6 +8,13 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 /* @var array $categories */
 /* @var bool $isCreate */
+
+$js = <<<JS
+$('#clientrepository-phone').mask('+0 (000) 000 00 00', {placeholder: "+_ (___) ___ __ __"});
+JS;
+
+$this->registerJs($js);
+
 ?>
 
 <div class="client-form">
@@ -24,7 +31,8 @@ use yii\widgets\ActiveForm;
 
         <?= $form->field($model, 'phone')->textInput(['maxlength' => true]) ?>
 
-        <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'email')->input('email',
+            ['maxlength' => true, 'placeholder' => 'email@example.com']) ?>
 
         <? /*= $form->field($model, 'category_id')->textInput() */ ?>
 

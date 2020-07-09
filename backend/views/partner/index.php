@@ -20,8 +20,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
+        'filterModel'  => $searchModel,
+        'layout'       => '{items}\n{pager}',
+        'columns'      => [
             //['class' => 'yii\grid\SerialColumn'],
 
             'id',
@@ -36,11 +37,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'class'    => 'yii\grid\ActionColumn',
                 'template' => '{view} {update} {delete}',
                 'buttons'  => [
-                    'view'   => function ($url, $model) {
-                        return Html::a(
-                            '<span class="fa fa-eye"></span>',
-                            $url);
-                    },
                     'update' => function ($url, $model) {
                         return Html::a(
                             '<span class="fa fa-pen"></span>',

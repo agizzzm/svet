@@ -12,7 +12,7 @@ class AppAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        //'css/site.css',
+        'css/breadcrumb.css',
         'plugins/fontawesome-free/css/all.min.css',
         'https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css',
         'dist/css/adminlte.min.css',
@@ -21,6 +21,7 @@ class AppAsset extends AssetBundle
     ];
     public $js = [
         'plugins/jquery/jquery.min.js',
+        'plugins/jquery/jquery.mask.js',
         'plugins/bootstrap/js/bootstrap.bundle.min.js',
         'dist/js/adminlte.min.js',
         'dist/js/demo.js',
