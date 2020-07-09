@@ -27,7 +27,7 @@ $("#orderrepository-client_id").select2({
 })
 ';
 
-$this->registerJs($js);
+//$this->registerJs($js);
 
 ?>
 
@@ -37,7 +37,8 @@ $this->registerJs($js);
 
         <?php $form = ActiveForm::begin(); ?>
 
-        <?= $form->field($model, 'client_id')->dropDownList([]) ?>
+        <?= $form->field($model,
+            'client_id')->dropDownList(\yii\helpers\ArrayHelper::merge([null => 'Выберите клиента'], $clients)) ?>
 
         <?= $form->field($model, 'cost')->textInput(['maxlength' => true]) ?>
 
