@@ -37,7 +37,7 @@ class PartnerSearchModel extends Partner
         if (array_key_exists('account-manager', $roles)) {
             $query->where(['id' => explode(',', $user->partners_ids)]);
         }
-        
+
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
