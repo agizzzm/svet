@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use common\models\repositories\PartnerRepository;
 use common\models\repositories\UserRepository;
 use Yii;
 use common\models\User;
@@ -37,6 +38,7 @@ class UserController extends Controller
         return $this->render('index', [
             'searchModel'  => $searchModel,
             'dataProvider' => $dataProvider,
+            'partners'     => $this->getPartners(),
         ]);
     }
 
@@ -52,6 +54,7 @@ class UserController extends Controller
         $model = new UserRepository();
 
         $post = Yii::$app->request->post('UserRepository');
+        $partners = Yii::$app->request->post('partners');
 
         if (!empty($post)) {
 
@@ -60,6 +63,7 @@ class UserController extends Controller
             $model->status = UserRepository::STATUS_ACTIVE;
             $model->username = $post['email'];
             $model->email = $post['email'];
+            $model->partners_ids = $partners ? implode(',', array_keys($partners)) : '';
 
             if ($model->save()) {
                 // ставим роли
@@ -76,7 +80,8 @@ class UserController extends Controller
         }
 
         return $this->render('create', [
-            'model' => $model,
+            'model'    => $model,
+            'partners' => $this->getPartners(),
         ]);
     }
 
@@ -85,6 +90,7 @@ class UserController extends Controller
         $model = $this->findModel($id);
 
         $post = Yii::$app->request->post('UserRepository');
+        $partners = Yii::$app->request->post('partners');
 
         if (!empty($post)) {
 
@@ -93,13 +99,16 @@ class UserController extends Controller
                 $model->setPassword($post['password_new']);
             }
 
+            $model->partners_ids = $partners ? implode(',', array_keys($partners)) : '';
+
             if ($model->save()) {
                 return $this->redirect(['index']);
             }
         }
 
         return $this->render('update', [
-            'model' => $model,
+            'model'    => $model,
+            'partners' => $this->getPartners(),
         ]);
     }
 
@@ -117,5 +126,17 @@ class UserController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    protected function getPartners()
+    {
+        $items = [];
+
+        $partners = PartnerRepository::getAll();
+        foreach ($partners as $partner) {
+            $items[$partner->id] = $partner->name;
+        }
+
+        return $items;
     }
 }

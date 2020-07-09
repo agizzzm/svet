@@ -7,6 +7,12 @@ use yii\widgets\ActiveForm;
 /* @var $model common\models\User */
 /* @var $form yii\widgets\ActiveForm */
 /* @var bool $isCreate */
+/* @var array $partners */
+
+$userPartners = [];
+if (!empty($model->partners_ids)) {
+    $userPartners = explode(',', $model->partners_ids);
+}
 ?>
 
 <div class="user-form">
@@ -22,6 +28,25 @@ use yii\widgets\ActiveForm;
         <?php else : ?>
             <?= $form->field($model, 'password_new')->input('password') ?>
         <?php endif ?>
+
+        <div class="form-group field-userrepository-email">
+            <label class="control-label">Назначенные партнеры</label>
+
+            <?php foreach ($partners as $id => $partner) : ?>
+                <?php
+                $checked = false;
+                foreach ($userPartners as $upId) {
+                    if ($id == $upId) {
+                        $checked = true;
+                        break;
+                    }
+                }
+                ?>
+                <br>
+                <?= Html::checkbox('partners[' . $id . ']', $checked) ?>&nbsp;<label><?= $partner ?></label>
+            <?php endforeach; ?>
+        </div>
+
 
         <div class="form-group">
             <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>

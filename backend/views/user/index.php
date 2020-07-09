@@ -6,6 +6,7 @@ use yii\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\search\UserSearchModel */
 /* @var $dataProvider yii\data\ActiveDataProvider */
+/* @var array $partners */
 
 $this->title = 'Пользователи';
 $this->params['breadcrumbs'][] = $this->title;
@@ -33,7 +34,21 @@ $this->params['breadcrumbs'][] = $this->title;
             //'created_at',
             //'updated_at',
             //'verification_token',
+            [
+                'attribute' => 'partners_ids',
+                'value'     => function ($model) use ($partners) {
+                    /* @var \common\models\repositories\UserRepository $model */
+                    $partnersIds = $model->partners_ids ? explode(',', $model->partners_ids) : [];
+                    $html = '';
+                    foreach ($partnersIds as $id) {
+                        if (isset($partners[$id])) {
+                            $html .= $partners[$id] . ' | ';
+                        }
+                    }
 
+                    return $html;
+                },
+            ],
             [
                 'class'    => 'yii\grid\ActionColumn',
                 'template' => '{view} {update} {delete}',

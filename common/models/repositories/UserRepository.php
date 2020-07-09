@@ -2,9 +2,18 @@
 
 namespace common\models\repositories;
 
+use yii\helpers\ArrayHelper;
+
 class UserRepository extends \common\models\User
 {
     public $password_new;
+
+    public function rules()
+    {
+        return ArrayHelper::merge(parent::rules(), [
+            [['email'], 'unique'],
+        ]);
+    }
 
     /**
      * @return UserRepository[]|[]
@@ -42,6 +51,7 @@ class UserRepository extends \common\models\User
             'email'         => 'Логин',
             'password_hash' => 'Пароль',
             'password_new'  => 'Новый пароль',
+            'partners_ids'  => 'Назначенные партнеры',
             'role'          => 'Роль',
         ];
     }
