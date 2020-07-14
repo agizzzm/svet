@@ -99,8 +99,13 @@ class PartnerBranchController extends Controller
     public function actionCreate()
     {
         $model = new PartnerBranchRepository();
+        $metros = Yii::$app->request->post('metros');
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+
+            $model->metro = $metros ? implode(',', $metros) : '';
+            $model->save();
+
             return $this->redirect(['index']);
         }
 
@@ -115,8 +120,13 @@ class PartnerBranchController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $metros = Yii::$app->request->post('metros');
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+
+            $model->metro = $metros ? implode(',', $metros) : '';
+            $model->save();
+
             return $this->redirect(['index']);
         }
 

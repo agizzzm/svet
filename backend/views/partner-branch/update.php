@@ -6,6 +6,7 @@ use yii\helpers\Html;
 /* @var $model common\models\db\PartnerBranch */
 /* @var array $partners */
 /* @var array $categories */
+/* @var array $metros */
 
 $this->title = 'Обновить данные: ' . $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Филиалы партнеров', 'url' => ['index']];
@@ -18,6 +19,7 @@ $this->params['breadcrumbs'][] = 'Update';
         'model'      => $model,
         'categories' => $categories,
         'partners'   => $partners,
+        'metros'     => $metros,
     ]) ?>
 
 </div>

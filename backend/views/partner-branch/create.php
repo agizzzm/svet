@@ -6,6 +6,7 @@ use yii\helpers\Html;
 /* @var $model common\models\db\PartnerBranch */
 /* @var array $partners */
 /* @var array $categories */
+/* @var array $metros */
 
 $this->title = 'Добавить филиал';
 $this->params['breadcrumbs'][] = ['label' => 'Филиалы партернов', 'url' => ['index']];
@@ -14,9 +15,10 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="partner-branch-create">
 
     <?= $this->render('_form', [
-        'model' => $model,
+        'model'      => $model,
         'categories' => $categories,
-        'partners' => $partners,
+        'partners'   => $partners,
+        'metros'     => $metros,
     ]) ?>
 
 </div>

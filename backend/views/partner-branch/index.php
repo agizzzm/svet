@@ -6,6 +6,7 @@ use yii\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\search\PartnerBranchSearchModel */
 /* @var $dataProvider yii\data\ActiveDataProvider */
+/* @var array $metros */
 
 $this->title = 'Филиалы партернов';
 $this->params['breadcrumbs'][] = $this->title;
@@ -41,8 +42,22 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $model->category ? $model->category->category : 'без категории';
                 },
             ],
-            'cost',
+            [
+                'attribute' => 'metro',
+                'value'     => function ($model) use ($metros) {
+                    /* @var \common\models\repositories\PartnerBranchRepository $model */
+                    $metroIds = $model->metro ? explode(',', $model->metro) : [];
+                    $html = '';
+                    foreach ($metroIds as $id) {
+                        if (isset($metros[$id])) {
+                            $html .= $metros[$id] . ' | ';
+                        }
+                    }
 
+                    return $html;
+                },
+            ],
+            'cost',
             [
                 'class'    => 'yii\grid\ActionColumn',
                 'template' => '{view} {update} {delete}',

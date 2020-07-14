@@ -54,6 +54,7 @@ class PartnerBranchRepository extends \common\models\db\PartnerBranch
             'id'          => 'ID',
             'partner_id'  => 'Партнер',
             'address'     => 'Адрес',
+            'metro'       => 'Метро',
             'coor'        => 'Координаты',
             'category_id' => 'Категория',
             'cost'        => 'Стоимость',
