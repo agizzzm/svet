@@ -7,6 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel common\models\search\PartnerBranchSearchModel */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 /* @var $yandexApiKey string */
+/* @var array $metros */
 
 $this->title = 'Филиалы на карте';
 $this->params['breadcrumbs'][] = $this->title;
@@ -52,9 +53,9 @@ if ($dataProvider && $dataProvider->models) {
     <?= Html::button('Найти', ['class' => 'btn btn-primary', 'id' => 'seacrh-map-btn']) ?>
 </div>
 <br>
-<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-    <div class="partner-branch-map">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 map-wrapper">
 
+    <div class="partner-branch-map">
         <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=<?= $yandexApiKey ?>"
                 type="text/javascript"></script>
         <script>
@@ -98,8 +99,6 @@ if ($dataProvider && $dataProvider->models) {
                     address = $('input[name="closest_address"]').val();
 
                     if (address != '') {
-                        console.log(address);
-
                         ymaps.geocode(address, {
                             results: 1
                         }).then(function (res) {
@@ -114,10 +113,60 @@ if ($dataProvider && $dataProvider->models) {
                             myMap.setCenter(coords, 14);
                         });
                     }
-                })
+                });
+
+                $(document).on('change', 'select[name="metros"]', function (e) {
+                    var metrosId = $('select[name="metros"]').val();
+                    var metrosName = $('select[name="metros"] option:selected').text();
+
+                    if (metrosName != '') {
+                        ymaps.geocode('метро ' + metrosName, {
+                            results: 1
+                        }).then(function (res) {
+                            var firstGeoObject = res.geoObjects.get(0),
+                                // Координаты геообъекта.
+                                coords = firstGeoObject.geometry.getCoordinates(),
+                                // Область видимости геообъекта.
+                                bounds = firstGeoObject.properties.get('boundedBy');
+                            myMap.setCenter(coords, 14);
+                        });
+                    }
+
+                    $('.partner-branch-aside ol li').hide();
+
+                    $.each($('.partner-branch-aside ol li'), function (index, value) {
+                        var $li = $(this);
+                        var metroData = $li.attr('data-metro');
+
+                        if (metroData != '') {
+                            var items = metroData.split(',');
+                            $.each(items, function (index2, value2) {
+                                if (value2 == metrosId) {
+                                    $li.show();
+                                }
+                            });
+                        }
+                    });
+                });
             });
         </script>
 
-        <div id="map" style="width: 70%; height: 600px"></div>
+        <div id="map" style="height: 600px"></div>
+    </div>
+
+    <div class="partner-branch-aside">
+        <?= Html::dropDownList('metros', null, \yii\helpers\ArrayHelper::merge([null => 'Подобрать по метро'], $metros),
+            ['class' => 'form-control select-metros']) ?>
+        <br>
+        <div class="branches-wrapper">
+
+            <?php if ($dataProvider && $dataProvider->models) : ?>
+                <ol>
+                    <?php foreach ($dataProvider->models as $key => $item) : ?>
+                        <li data-metro="<?= $item->metro ?>"><?= $item->address ?></li>
+                    <?php endforeach; ?>
+                </ol>
+            <?php endif ?>
+        </div>
     </div>
 </div>
