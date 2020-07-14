@@ -65,7 +65,9 @@ class PartnerBranchController extends Controller
                         isset($response->response->GeoObjectCollection->featureMember[0]->GeoObject) &&
                         isset($response->response->GeoObjectCollection->featureMember[0]->GeoObject->Point)
                     ) {
-                        $item->coor = (string)$response->response->GeoObjectCollection->featureMember[0]->GeoObject->Point->pos;
+                        $coor = (string)$response->response->GeoObjectCollection->featureMember[0]->GeoObject->Point->pos;
+                        $coor = explode(" ", $coor);
+                        $item->coor = implode(" ", [$coor[1], $coor[0]]);
                         $item->save();
                     }
                 }
