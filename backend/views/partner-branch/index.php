@@ -46,7 +46,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'metro',
                 'value'     => function ($model) use ($metros) {
                     /* @var \common\models\repositories\PartnerBranchRepository $model */
-                    $metroIds = $model->metro ? explode(',', $model->metro) : [];
+                    $metroIds = (isset($model->metro)) ? explode(',', $model->metro) : [];
                     $html = '';
                     foreach ($metroIds as $id) {
                         if (isset($metros[$id])) {
