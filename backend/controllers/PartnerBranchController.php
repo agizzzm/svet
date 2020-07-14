@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use common\models\repositories\CategoryRepository;
 use common\models\repositories\ClientRepository;
+use common\models\repositories\MetroRepository;
 use common\models\repositories\PartnerBranchRepository;
 use common\models\repositories\PartnerRepository;
 use Yii;
@@ -43,6 +44,7 @@ class PartnerBranchController extends Controller
             'dataProvider' => $dataProvider,
             'partners'     => $this->getPartners(),
             'categories'   => $this->getCategories(),
+            'metros'       => MetroRepository::getAll(),
         ]);
     }
 
@@ -79,6 +81,7 @@ class PartnerBranchController extends Controller
             'dataProvider' => $dataProvider,
             'partners'     => $this->getPartners(),
             'categories'   => $this->getCategories(),
+            'metros'       => MetroRepository::getAll(),
             'yandexApiKey' => $yandexApiKey,
         ]);
     }
@@ -89,6 +92,7 @@ class PartnerBranchController extends Controller
             'model'      => $this->findModel($id),
             'partners'   => $this->getPartners(),
             'categories' => $this->getCategories(),
+            'metros'     => MetroRepository::getAll(),
         ]);
     }
 
@@ -104,6 +108,7 @@ class PartnerBranchController extends Controller
             'model'      => $model,
             'partners'   => $this->getPartners(),
             'categories' => $this->getCategories(),
+            'metros'     => MetroRepository::getAll(),
         ]);
     }
 
@@ -119,6 +124,7 @@ class PartnerBranchController extends Controller
             'model'      => $model,
             'partners'   => $this->getPartners(),
             'categories' => $this->getCategories(),
+            'metros'     => MetroRepository::getAll(),
         ]);
     }
 

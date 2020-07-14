@@ -13,6 +13,7 @@ use Yii;
  * @property int $category_id Категория
  * @property float $cost Стоимость
  * @property string|null $coor Координаты на карте
+ * @property string|null $metro Ближайщие метро
  */
 class PartnersBranches extends \yii\db\ActiveRecord
 {
@@ -32,7 +33,7 @@ class PartnersBranches extends \yii\db\ActiveRecord
         return [
             [['partner_id', 'address', 'category_id', 'cost'], 'required'],
             [['partner_id', 'category_id'], 'integer'],
-            [['address'], 'string'],
+            [['address', 'metro'], 'string'],
             [['cost'], 'number'],
             [['coor'], 'string', 'max' => 255],
         ];
@@ -50,6 +51,7 @@ class PartnersBranches extends \yii\db\ActiveRecord
             'category_id' => 'Category ID',
             'cost' => 'Cost',
             'coor' => 'Coor',
+            'metro' => 'Metro',
         ];
     }
 }
