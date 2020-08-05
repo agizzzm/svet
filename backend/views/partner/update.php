@@ -6,9 +6,9 @@ use yii\helpers\Html;
 /* @var $model common\models\db\Partner */
 
 $this->title = 'Обновить данные: ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Partners', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Партнеры', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = 'Обновить';
 ?>
 <div class="partner-update">
 

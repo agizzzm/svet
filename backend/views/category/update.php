@@ -6,9 +6,9 @@ use yii\helpers\Html;
 /* @var $model common\models\db\Category */
 
 $this->title = 'Обновить категорию: ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Categories', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Категории', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = 'Обновить';
 ?>
 <div class="category-update">
     <?= $this->render('_form', [

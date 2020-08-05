@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model common\models\db\PartnerBranch */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Partner Branches', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Филиалы партнеров', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
