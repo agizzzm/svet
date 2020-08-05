@@ -30,7 +30,8 @@ if ($dataProvider && $dataProvider->models) {
         var iconColor = "#735184";
         
         var placemark = new ymaps.Placemark([' . str_replace(' ', ',', $item->coor) . '], {
-            balloonContent: html
+            iconCaption: html,
+            balloonContent: html + " руб."
         }, {
             preset: "islands#icon",
             iconColor: iconColor

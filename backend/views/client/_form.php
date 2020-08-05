@@ -34,8 +34,6 @@ $this->registerJs($js);
         <?= $form->field($model, 'email')->input('email',
             ['maxlength' => true, 'placeholder' => 'email@example.com']) ?>
 
-        <? /*= $form->field($model, 'category_id')->textInput() */ ?>
-
         <?= $form->field($model, 'category_id')->dropDownList($categories) ?>
 
         <?= $form->field($model, 'cost')->textInput(['maxlength' => true]) ?>
