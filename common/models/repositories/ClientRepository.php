@@ -48,7 +48,7 @@ class ClientRepository extends \common\models\db\Client
     public function getOrders()
     {
         if ($this->_orders == null) {
-            $this->_orders = $this->hasMany(OrderRepository::class, ['order_id' => 'id'])->all();
+            $this->_orders = $this->hasMany(OrderRepository::class, ['client_id' => 'id'])->all();
         }
 
         return $this->_orders;

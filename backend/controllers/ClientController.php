@@ -46,7 +46,7 @@ class ClientController extends Controller
     public function actionView($id)
     {
         return $this->render('view', [
-            'orderModel'      => OrderRepository::getById($id),
+            'orderModel' => OrderRepository::getById($id),
             'categories' => $this->getCategories(),
         ]);
     }
@@ -86,7 +86,14 @@ class ClientController extends Controller
 
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $client = $this->findModel($id);
+
+        // удаляем все заказы клиента
+        foreach ($client->orders as $order) {
+            $order->delete();
+        }
+        // удаляем самого клиента
+        $client->delete();
 
         return $this->redirect(['index']);
     }
