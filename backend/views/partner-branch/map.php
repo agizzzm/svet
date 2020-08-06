@@ -18,7 +18,7 @@ $categoriesLicence = [];
 $labels = '';
 if ($dataProvider && $dataProvider->models) {
     foreach ($dataProvider->models as $key => $item) {
-        $categoriesLicence[$item->category_id] = $item->category->category;
+        $categoriesLicence[$item->category_id] = $item->category ? $item->category->category : '';
 
         if ($key == 0) {
             $mapStart = str_replace(' ', ',', $item->coor);
