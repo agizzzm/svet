@@ -32,6 +32,8 @@ class PartnerSearchModel extends Partner
 
         $query = PartnerRepository::find();
 
+        // если текущий пользователь имеет роль аккаунт-менеджер
+        // то смотрим каких партнеров он может видеть
         $authManager = Yii::$app->authManager;
         $roles = Yii::$app->authManager->getRolesByUser($user->id);
         if (array_key_exists('account-manager', $roles)) {

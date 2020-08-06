@@ -3,6 +3,8 @@
 namespace common\models\search;
 
 use common\models\repositories\PartnerBranchRepository;
+use common\models\repositories\UserRepository;
+use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use common\models\db\PartnerBranch;
@@ -30,9 +32,18 @@ class PartnerBranchSearchModel extends PartnerBranch
 
     public function search($params)
     {
+        /* @var UserRepository $user */
+        $user = Yii::$app->user->identity;
+
         $query = PartnerBranchRepository::find();
 
-        // add conditions that should always apply here
+        // если текущий пользователь имеет роль аккаунт-менеджер
+        // то смотрим каких партнеров он может видеть
+        $authManager = Yii::$app->authManager;
+        $roles = Yii::$app->authManager->getRolesByUser($user->id);
+        if (array_key_exists('account-manager', $roles)) {
+            $query->where(['id' => explode(',', $user->partners_ids)]);
+        }
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
