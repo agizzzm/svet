@@ -75,7 +75,14 @@ class PartnerController extends Controller
 
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $partner = $this->findModel($id);
+
+        // при удалении партнера удаляем филиалы
+        foreach ($partner->branches as $branch) {
+            $branch->delete();
+        }
+        // удаляем самого партнера
+        $partner->delete();
 
         return $this->redirect(['index']);
     }

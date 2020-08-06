@@ -56,7 +56,7 @@ $this->registerJs($js);
         <?php endif ?>
 
         <div class="form-group field-userrepository-email">
-            <label class="control-label">Назначенные партнеры</label>
+            <label class="control-label">Назначенные партнеры (видимость партнеров)</label>
             <?= Html::dropDownList('partners[]', null, $partners,
                 [
                     'class'    => 'form-control',
