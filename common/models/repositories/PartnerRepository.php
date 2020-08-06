@@ -7,6 +7,7 @@ use common\models\db\PartnerBranch;
 class PartnerRepository extends \common\models\db\Partner
 {
     public $_branches = null;
+    public $_clients = null;
 
     /**
      * @return PartnerRepository[]|[]
@@ -44,6 +45,18 @@ class PartnerRepository extends \common\models\db\Partner
         }
 
         return $this->_branches;
+    }
+
+    /**
+     * @return ClientRepository[]|[]
+     */
+    public function getClients()
+    {
+        if ($this->_clients == null) {
+            $this->_clients = $this->hasMany(ClientRepository::class, ['partner_id' => 'id'])->all();
+        }
+
+        return $this->_clients;
     }
 
     public function attributeLabels()

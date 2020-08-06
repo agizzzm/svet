@@ -3,8 +3,12 @@
 namespace common\models\search;
 
 use common\models\repositories\ClientRepository;
+use common\models\repositories\UserRepository;
+use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
+use yii\db\Query;
+use yii\db\QueryBuilder;
 
 /**
  * ClientSearchModel represents the model behind the search form of `common\models\db\Client`.
@@ -41,9 +45,34 @@ class ClientSearchModel extends ClientRepository
      */
     public function search($params)
     {
+        /* текущий пользователь */
+        /* @var UserRepository $user */
+        $user = Yii::$app->user->identity;
+
         $query = ClientRepository::find();
 
-        // add conditions that should always apply here
+        // если текущий пользователь имеет роль аккаунт-менеджер
+        // то смотрим каких партнеров он может видеть
+        $authManager = Yii::$app->authManager;
+        $roles = Yii::$app->authManager->getRolesByUser($user->id);
+        if (array_key_exists('account-manager', $roles)) {
+            // партнеры, видимые текущему пользователю
+            $partners_ids = explode(',', $user->partners_ids);
+
+            // смотрим пользователей которые должны быть показаны данному аккаунт менеджеру
+            $subQuery = new Query();
+            $subQuery->select('id');
+            $subQuery->from(ClientRepository::tableName());
+            $subQuery->where(['partner_id' => $partners_ids]);
+            $rows = $subQuery->all();
+
+            $clientIds = [];
+            foreach ($rows as $row) {
+                $clientIds[] = $row['id'];
+            }
+
+            $query->where(['id' => $clientIds]);
+        }
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
