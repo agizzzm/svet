@@ -33,6 +33,8 @@ $isActiveUserMenuItem = ($this->context->route == "user/index") ? 'active' : '';
 $isActiveCategoryMenuItem = ($this->context->route == "category/index") ? 'active' : '';
 $isActiveUserMenuItem = ($this->context->route == "user/index") ? 'active' : '';
 
+/* @var UserRepository $user */
+$user = Yii::$app->user->identity;
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -57,7 +59,7 @@ $isActiveUserMenuItem = ($this->context->route == "user/index") ? 'active' : '';
                 <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <a href="<?= Url::to(['site/index']) ?>" class="nav-link">Главная</a>
+                <a href="<?= Url::to(['site/index']) ?>" class="nav-link">Главная (<?=$user->username ?>)</a>
             </li>
             <li class="nav-item">
                 <a href="<?= Url::to(['site/logout']) ?>" data-method="post" class="nav-link">Выход</a>
