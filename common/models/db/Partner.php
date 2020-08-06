@@ -14,6 +14,8 @@ use Yii;
  * @property string $email Email
  * @property string $region Регион
  * @property string $city Город
+ * @property string|null $inn ИНН
+ * @property string|null $ur_address Юридический адрес
  */
 class Partner extends \yii\db\ActiveRecord
 {
@@ -32,7 +34,9 @@ class Partner extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'contact', 'contact_phone', 'email', 'region', 'city'], 'required'],
+            [['ur_address'], 'string'],
             [['name', 'contact', 'contact_phone', 'email', 'region', 'city'], 'string', 'max' => 255],
+            [['inn'], 'string', 'max' => 40],
             [['contact_phone'], 'unique'],
             [['email'], 'unique'],
         ];
@@ -51,6 +55,8 @@ class Partner extends \yii\db\ActiveRecord
             'email' => 'Email',
             'region' => 'Region',
             'city' => 'City',
+            'inn' => 'Inn',
+            'ur_address' => 'Ur Address',
         ];
     }
 }

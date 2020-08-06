@@ -56,6 +56,8 @@ class PartnerRepository extends \common\models\db\Partner
             'email'         => 'Email',
             'region'        => 'Регион',
             'city'          => 'Город',
+            'inn'           => 'ИНН',
+            'ur_address'    => 'Юридический адрес',
         ];
     }
 }
