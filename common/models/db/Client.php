@@ -16,6 +16,7 @@ use Yii;
  * @property int $category_id Категория
  * @property float|null $cost Стоимость
  * @property float|null $first_payment Первый взнос
+ * @property int|null $partner_id Партнер
  */
 class Client extends \yii\db\ActiveRecord
 {
@@ -34,7 +35,7 @@ class Client extends \yii\db\ActiveRecord
     {
         return [
             [['phone', 'email', 'category_id'], 'required'],
-            [['category_id'], 'integer'],
+            [['category_id', 'partner_id'], 'integer'],
             [['cost', 'first_payment'], 'number'],
             [['lastname', 'firstname', 'middlename', 'phone', 'email'], 'string', 'max' => 255],
             [['phone'], 'unique'],
@@ -57,6 +58,7 @@ class Client extends \yii\db\ActiveRecord
             'category_id' => 'Category ID',
             'cost' => 'Cost',
             'first_payment' => 'First Payment',
+            'partner_id' => 'Partner ID',
         ];
     }
 }

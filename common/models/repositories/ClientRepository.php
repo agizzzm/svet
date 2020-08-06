@@ -6,6 +6,7 @@ class ClientRepository extends \common\models\db\Client
 {
     public $_orders = null;
     public $_category = null;
+    public $_partner = null;
 
     /**
      * @return ClientRepository[]|[]
@@ -66,6 +67,17 @@ class ClientRepository extends \common\models\db\Client
         return $this->_category;
     }
 
+    /**
+     * @return PartnerRepository|null
+     */
+    public function getPartner()
+    {
+        if ($this->_partner == null) {
+            $this->_partner = $this->hasOne(PartnerRepository::class, ['id' => 'partner_id'])->one();
+        }
+
+        return $this->_partner;
+    }
 
     public function attributeLabels()
     {
@@ -79,6 +91,7 @@ class ClientRepository extends \common\models\db\Client
             'category_id'   => 'Категория',
             'cost'          => 'Стоимость',
             'first_payment' => 'Первый взнос',
+            'partner_id'    => 'Партнер',
         ];
     }
 }

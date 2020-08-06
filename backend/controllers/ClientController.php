@@ -6,6 +6,7 @@ use common\models\db\Order;
 use common\models\repositories\CategoryRepository;
 use common\models\repositories\ClientRepository;
 use common\models\repositories\OrderRepository;
+use common\models\repositories\PartnerRepository;
 use Yii;
 use common\models\search\ClientSearchModel;
 use yii\filters\AccessControl;
@@ -40,6 +41,7 @@ class ClientController extends Controller
             'searchModel'  => $searchModel,
             'dataProvider' => $dataProvider,
             'categories'   => $this->getCategories(),
+            'partners'     => $this->getPartners(),
         ]);
     }
 
@@ -48,6 +50,7 @@ class ClientController extends Controller
         return $this->render('view', [
             'orderModel' => OrderRepository::getById($id),
             'categories' => $this->getCategories(),
+            'partners'     => $this->getPartners(),
         ]);
     }
 
@@ -67,6 +70,7 @@ class ClientController extends Controller
         return $this->render('create', [
             'model'      => $model,
             'categories' => $this->getCategories(),
+            'partners'     => $this->getPartners(),
         ]);
     }
 
@@ -81,6 +85,7 @@ class ClientController extends Controller
         return $this->render('update', [
             'model'      => $model,
             'categories' => $this->getCategories(),
+            'partners'     => $this->getPartners(),
         ]);
     }
 
@@ -114,6 +119,18 @@ class ClientController extends Controller
         $categories = CategoryRepository::getAll();
         foreach ($categories as $category) {
             $items[$category->id] = $category->category;
+        }
+
+        return $items;
+    }
+
+    protected function getPartners()
+    {
+        $items = [];
+
+        $partners = PartnerRepository::getAll();
+        foreach ($partners as $partner) {
+            $items[$partner->id] = $partner->name;
         }
 
         return $items;

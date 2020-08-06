@@ -7,6 +7,7 @@ use yii\widgets\ActiveForm;
 /* @var $model common\models\repositories\ClientRepository */
 /* @var $form yii\widgets\ActiveForm */
 /* @var array $categories */
+/* @var array $partners */
 /* @var bool $isCreate */
 
 $js = <<<JS
@@ -34,7 +35,11 @@ $this->registerJs($js);
         <?= $form->field($model, 'email')->input('email',
             ['maxlength' => true, 'placeholder' => 'email@example.com']) ?>
 
-        <?= $form->field($model, 'category_id')->dropDownList($categories) ?>
+        <?= $form->field($model, 'category_id')->dropDownList(\yii\helpers\ArrayHelper::merge([null => 'Не выбрано'],
+            $categories)) ?>
+
+        <?= $form->field($model, 'partner_id')->dropDownList(\yii\helpers\ArrayHelper::merge([null => 'Не выбрано'],
+            $partners)) ?>
 
         <?= $form->field($model, 'cost')->textInput(['maxlength' => true]) ?>
 

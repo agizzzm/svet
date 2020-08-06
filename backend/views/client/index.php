@@ -38,6 +38,13 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $model->category ? $model->category->category : 'без категории';
                 },
             ],
+            [
+                'attribute' => 'partner_id',
+                'value'     => function ($model) {
+                    /* @var \common\models\repositories\PartnerRepository $model */
+                    return $model->partner ? $model->partner->name : 'не привязан к партнеру';
+                },
+            ],
             'cost',
             'first_payment',
 
